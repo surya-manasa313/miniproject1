@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Info Finder Demo</title>
+<style>
+body{font-family:Arial,sans-serif;background:#0f172a;color:white;margin:0;padding:20px}
+h1{text-align:center;margin-bottom:20px}
+#search{width:100%;max-width:400px;padding:12px;border:none;border-radius:10px;display:block;margin:0 auto 30px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:#1e293b;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.3);transition:.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:180px;object-fit:cover}
+.content{padding:15px}
+.content h2{margin-bottom:10px}
+.content p{margin:6px 0}
+</style>
+</head>
+<body>
+<h1>🌍 Country Info Finder Demo</h1>
+<input type="text" id="search" placeholder="Search Country...">
+<div id="countries" class="grid"></div>
+
+<script>
+const countriesData = [{
+name:"India",
+capital:"New Delhi",
+region:"Asia",
+population:"1.4 Billion",
+language:"Hindi, English",
+currency:"Indian Rupee",
+flag:"https://flagcdn.com/w320/in.png"
+},
+{
+name:"United States",
+capital:"Washington D.C.",
+region:"Americas",
+population:"331 Million",
+language:"English",
+currency:"US Dollar",
+flag:"https://flagcdn.com/w320/us.png"
+},
+{
+name:"Japan",
+capital:"Tokyo",
+region:"Asia",
+population:"125 Million",
+language:"Japanese",
+currency:"Yen",
+flag:"https://flagcdn.com/w320/jp.png"
+},
+{
+name:"Australia",
+capital:"Canberra",
+region:"Oceania",
+population:"26 Million",
+language:"English",
+currency:"Australian Dollar",
+flag:"https://flagcdn.com/w320/au.png"
+},
+{
+name:"France",
+capital:"Paris",
+region:"Europe",
+population:"67 Million",
+language:"French",
+currency:"Euro",
+flag:"https://flagcdn.com/w320/fr.png"
+},
+{
+name:"Brazil",
+capital:"Brasilia",
+region:"Americas",
+population:"214 Million",
+language:"Portuguese",
+currency:"Brazilian Real",
+flag:"https://flagcdn.com/w320/br.png"
+},
+{
+name:"Canada",
+capital:"Ottawa",
+region:"Americas",
+population:"38 Million",
+language:"English, French",
+currency:"Canadian Dollar",
+flag:"https://flagcdn.com/w320/ca.png"
+},
+{
+name:"Germany",
+capital:"Berlin",
+region:"Europe",
+population:"83 Million",
+language:"German",
+currency:"Euro",
+flag:"https://flagcdn.com/w320/de.png"
+},
+{
+name:"China",
+capital:"Beijing",
+region:"Asia",
+population:"1.41 Billion",
+language:"Chinese",
+currency:"Yuan",
+flag:"https://flagcdn.com/w320/cn.png"
+},
+{
+name:"Russia",
+capital:"Moscow",
+region:"Europe",
+population:"144 Million",
+language:"Russian",
+currency:"Ruble",
+flag:"https://flagcdn.com/w320/ru.png"
+},
+{
+name:"South Africa",
+capital:"Pretoria",
+region:"Africa",
+population:"60 Million",
+language:"Zulu, English",
+currency:"Rand",
+flag:"https://flagcdn.com/w320/za.png"
+},
+{
+name:"Italy",
+capital:"Rome",
+region:"Europe",
+population:"59 Million",
+language:"Italian",
+currency:"Euro",
+flag:"https://flagcdn.com/w320/it.png"
+},
+{
+name:"Mexico",
+capital:"Mexico City",
+region:"Americas",
+population:"128 Million",
+language:"Spanish",
+currency:"Mexican Peso",
+flag:"https://flagcdn.com/w320/mx.png"
+},
+{
+name:"South Korea",
+capital:"Seoul",
+region:"Asia",
+population:"51 Million",
+language:"Korean",
+currency:"Won",
+flag:"https://flagcdn.com/w320/kr.png"
+},
+{
+name:"United Kingdom",
+capital:"London",
+region:"Europe",
+population:"67 Million",
+language:"English",
+currency:"Pound Sterling",
+flag:"https://flagcdn.com/w320/gb.png"
+}];
+
+const countriesContainer=document.getElementById("countries");
+const searchInput=document.getElementById("search");
+
+function displayCountries(data){
+countriesContainer.innerHTML="";
+data.forEach(country=>{
+const card=document.createElement("div");
+card.classList.add("card");
+card.innerHTML=`
+<img src="${country.flag}" loading="lazy">
+<div class="content">
+<h2>${country.name}</h2>
+<p><strong>Capital:</strong> ${country.capital}</p>
+<p><strong>Region:</strong> ${country.region}</p>
+<p><strong>Population:</strong> ${country.population}</p>
+<p><strong>Language:</strong> ${country.language}</p>
+<p><strong>Currency:</strong> ${country.currency}</p>
+</div>`;
+countriesContainer.appendChild(card);
+});
+}
+
+displayCountries(countriesData);
+
+searchInput.addEventListener("input",()=>{
+const value=searchInput.value.toLowerCase();
+const filtered=countriesData.filter(country=>
+country.name.toLowerCase().includes(value)
+);
+displayCountries(filtered);
+});
+</script>
+</body>
+</html>
